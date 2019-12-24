@@ -6,7 +6,6 @@ const getMatchType = require('../getMatchType')
 
 module.exports = function baseFinder({
   ast,
-  // isValidType,
   Check,
 }) {
   const isValidType = (type) => {

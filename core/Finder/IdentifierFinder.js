@@ -3,19 +3,9 @@ const baseFinder = require('./baseFinder')
 module.exports = function IdentifierFinder(ast) {
   return baseFinder({
     ast,
-    // isValidType,
     Check,
   })
 }
-
-const validTypes = [
-  // class Btn extends Component {}
-  'ClassDeclaration',
-  'VariableDeclaration',
-  'ExpressionStatement',
-]
-
-const isValidType = (type) => validTypes.includes(type) ? type : false
 
 const Check = {
   // class Btn extends Component {}
@@ -53,6 +43,7 @@ const Check = {
       if (
         initPath.isIdentifier() ||
         initPath.isArrowFunctionExpression()
+        // initPath.isFunctionDeclaration()
       ) {
         return initPath
       } else {
@@ -78,4 +69,21 @@ const Check = {
       node: '',
     }
   },
+
+  FunctionDeclaration(maybeMatchdNode, sourceNode) {
+    const sourceTagNamePath = sourceNode
+    const maybeMatchdNodeRawName = maybeMatchdNode.get('id').node.name
+    const isMatched = sourceTagNamePath.isIdentifier({ name: maybeMatchdNodeRawName })
+    if (isMatched) {
+      const node = maybeMatchdNode
+      return {
+        isMatched,
+        node,
+      }
+    }
+    return {
+      isMatched: false,
+      node: '',
+    }
+  }
 }

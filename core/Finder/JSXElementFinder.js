@@ -3,23 +3,9 @@ const baseFinder = require('./baseFinder')
 module.exports = function JSXElementFinder(ast) {
   return baseFinder({
     ast,
-    // isValidType,
     Check,
   })
 }
-
-const validTypes = [
-  // let Btn = () => {}
-  'VariableDeclaration',
-  // case 1: Btn = () => {} 
-  // case 2: Btn = function() {}
-  // case 3: Btn = this.t
-  'AssignmentExpression',
-  // class Btn extends Component {}
-  'ClassDeclaration',
-]
-
-const isValidType = (type) => validTypes.includes(type) ? type : false
 
 const Check = {
   // class Btn extends Component {}
@@ -71,6 +57,24 @@ const Check = {
     const isMatched = maybeMatchdNode.get('expression').get('left').isIdentifier({ name: sourceTagName })
     if (isMatched) {
       const node = maybeMatchdNode.get('expression').get('right')
+      return {
+        isMatched: true,
+        node,
+      }
+    }
+    return {
+      isMatched: false,
+      node: '',
+    }
+  },
+
+  // function Btn2() { return <button></button> }
+  FunctionDeclaration(maybeMatchdNode, sourceNode) {
+    const sourceTagNamePath = sourceNode.get('openingElement').get('name')
+    const sourceTagName = sourceTagNamePath.node.name
+    const isMatched = maybeMatchdNode.get('id').isIdentifier({ name: sourceTagName })
+    if (isMatched) {
+      const node = maybeMatchdNode
       return {
         isMatched: true,
         node,

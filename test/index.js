@@ -8,12 +8,18 @@ const code = `
 //     return <button>{this.props.btnText}</button>
 //   }
 // }
-const Btn2 = () => {
+// const Btn2 = () => {
+//   return <button>{this.props.btnText}</button>
+// }
+function Btn5() {
+  return <button>{this.props.btnText}</button>
+}
+function Btn2() {
   return <button>{this.props.btnText}</button>
 }
 let Btn3
-Btn3 = Btn2
-const B = Btn3
+// Btn3 = Btn2
+const B = Btn2
 class App extends React.Component{
   renderA = () => {
     return <div>AAA</div>

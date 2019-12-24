@@ -18,9 +18,6 @@ function finder() {
     } else if (startAst.isIdentifier()) {
       splitInputTypeNames = [{ type: 'Identifier', value: startAst.node.name }]
     }
-    // else if (startAst.isArrowFunctionExpression()) {
-    //   splitInputTypeNames = 
-    // } 
     else {
       const msg = `暂不支持${startAst.type}`
       throw Error(msg)

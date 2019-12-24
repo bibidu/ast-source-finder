@@ -6,6 +6,7 @@ module.exports = function getMatchType(type) {
         'VariableDeclaration',
         'ExpressionStatement',
         'ArrowFunctionExpression',
+        'FunctionDeclaration',
       ]
     case 'Identifier':
       return [
@@ -13,6 +14,7 @@ module.exports = function getMatchType(type) {
         'VariableDeclaration',
         'ExpressionStatement',
         'ArrowFunctionExpression',
+        'FunctionDeclaration',
       ]
     default:
       return []
