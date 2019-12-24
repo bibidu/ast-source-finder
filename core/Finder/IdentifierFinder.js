@@ -3,7 +3,7 @@ const baseFinder = require('./baseFinder')
 module.exports = function IdentifierFinder(ast) {
   return baseFinder({
     ast,
-    isValidType,
+    // isValidType,
     Check,
   })
 }
@@ -12,6 +12,7 @@ const validTypes = [
   // class Btn extends Component {}
   'ClassDeclaration',
   'VariableDeclaration',
+  'ExpressionStatement',
 ]
 
 const isValidType = (type) => validTypes.includes(type) ? type : false
@@ -34,7 +35,7 @@ const Check = {
     const declarations = maybeMatchdNode.get('declarations')
     for (let decl of declarations) {
       const name = decl.get('id').node.name
-      if (isMatched(name)) {
+      if (isMatched(name) && decl.get('init').type) {
         const node = getVariableDeclaratorValue(declarations[decl.key])
         return {
           isMatched: true,
@@ -55,6 +56,23 @@ const Check = {
         const msg = `getVariableDeclaratorValue缺少${initPath.type}类型`
         throw Error(msg)
       }
+    }
+  },
+
+  // Btn3 = Btn2
+  ExpressionStatement(maybeMatchdNode, sourceNode) {
+    const sourceTagNamePath = sourceNode
+    const maybeMatchdNodeRawName = maybeMatchdNode.get('expression').get('left').node.name
+    const isMatched = sourceTagNamePath.isIdentifier({ name: maybeMatchdNodeRawName })
+    if (isMatched) {
+      return {
+        isMatched,
+        node: maybeMatchdNode.get('expression').get('right'),
+      }
+    }
+    return {
+      isMatched: false,
+      node: '',
     }
   }
 }

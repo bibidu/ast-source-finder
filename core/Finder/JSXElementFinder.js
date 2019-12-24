@@ -3,7 +3,7 @@ const baseFinder = require('./baseFinder')
 module.exports = function JSXElementFinder(ast) {
   return baseFinder({
     ast,
-    isValidType,
+    // isValidType,
     Check,
   })
 }
@@ -62,6 +62,23 @@ const Check = {
         const msg = `getVariableDeclaratorValue缺少${initPath.type}类型`
         throw Error(msg)
       }
+    }
+  },
+
+  ExpressionStatement(maybeMatchdNode, sourceNode) {
+    const sourceTagNamePath = sourceNode.get('openingElement').get('name')
+    const sourceTagName = sourceTagNamePath.node.name
+    const isMatched = maybeMatchdNode.get('expression').get('left').isIdentifier({ name: sourceTagName })
+    if (isMatched) {
+      const node = maybeMatchdNode.get('expression').get('right')
+      return {
+        isMatched: true,
+        node,
+      }
+    }
+    return {
+      isMatched: false,
+      node: '',
     }
   }
 }

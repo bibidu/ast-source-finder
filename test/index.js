@@ -8,7 +8,8 @@ class Btn2 extends React.Component{
     return <button>{this.props.btnText}</button>
   }
 }
-const Btn3 = Btn2
+let Btn3
+Btn3 = Btn2
 const B = Btn3
 class App extends React.Component{
   renderA = () => {
@@ -22,7 +23,8 @@ class App extends React.Component{
       }
     </>
   }
-}`
+}
+`
 
 const ast = parser.parse(code, {
   sourceType: "module",

@@ -1,3 +1,4 @@
+const getMatchType = require('./getMatchType')
 const Finder = {
   JSXElementFinder: require('./Finder/JSXElementFinder'),
   IdentifierFinder: require('./Finder/IdentifierFinder'),
@@ -20,16 +21,16 @@ function finder() {
       const msg = `暂不支持${startAst.type}`
       throw Error(msg)
     }
-
     return splitInputTypeNames.reduce((prev, curr) => {
       const { type: _type } = curr
       const fn = Finder[`${_type}Finder`]
       const { isMatched, node } = prev(fn(startAst))
       if (isMatched) {
-        if ((matchTypes || getMatchType(startAst)).includes(node.type)) {
+        if ((matchTypes || getMatchType(startAst.type)).includes(node.type)) {
           return { isMatched, node }
         } else {
-          return _f({ startAst: node, matchTypes: getMatchType(node) })
+          console.log(`[_f] ${node.type}`)
+          return _f({ startAst: node, matchTypes: getMatchType(node.type) })
         }
       }
       return { isMatched: false }
@@ -45,16 +46,3 @@ const splitInputType = (name) => {
   return array
 }
 
-const getMatchType = (startAst) => {
-  switch(startAst.type) {
-    case 'JSXElement':
-      return ['ClassDeclaration']
-    case 'Identifier':
-      return [
-        'ClassDeclaration',
-        'VariableDeclaration'
-      ]
-    default:
-      return []
-  }
-}
