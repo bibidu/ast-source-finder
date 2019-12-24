@@ -1,0 +1,23 @@
+{
+  "name": "ast-source-finder",
+  "version": "1.0.0",
+  "description": "## Example ```js import finder from 'ast-source-finder' import parser from '@babel/parser'",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bibidu/ast-source-finder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bibidu/ast-source-finder/issues"
+  },
+  "homepage": "https://github.com/bibidu/ast-source-finder#readme"
+}
