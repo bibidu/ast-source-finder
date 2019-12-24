@@ -28,14 +28,12 @@ const ast = parser.parse(`
 `)
 
 // case1: 输出Btn对应的AST Node
-finder(ast)({
-  type: 'tag',
+finder({
   startAst: '/* Btn JSXElement所在的AST Node */'
 })
 
 // case2: 输出renderA对应的AST Node
-finder(ast)({
-  type: 'method',
+finder({
   startAst: '/* this.renderA() CallExpression所在的AST Node */'
 })
 ```
