@@ -8,7 +8,8 @@ class Btn2 extends React.Component{
     return <button>{this.props.btnText}</button>
   }
 }
-const B = Btn2
+const Btn3 = Btn2
+const B = Btn3
 class App extends React.Component{
   renderA = () => {
     return <div>AAA</div>

@@ -17,9 +17,9 @@ module.exports = function baseFinder({
         // 节点类型校验
         let validType = ''
         if (validType = isValidType(currentSibling.type)) {
-          const fn = Check[`${validType}Finder`]
+          const fn = Check[`${validType}`]
           if (typeof fn !== 'function') {
-            const msg = `没有匹配的Check方法: ${type}Finder`
+            const msg = `没有匹配的Check方法: Check.${validType}`
             throw Error(msg)
           }
           const { isMatched, node } = fn(currentSibling, ast)

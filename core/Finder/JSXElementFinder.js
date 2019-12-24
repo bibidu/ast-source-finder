@@ -23,7 +23,7 @@ const isValidType = (type) => validTypes.includes(type) ? type : false
 
 const Check = {
   // class Btn extends Component {}
-  ClassDeclarationFinder(maybeMatchdNode, sourceNode) {
+  ClassDeclaration(maybeMatchdNode, sourceNode) {
     const sourceTagNamePath = sourceNode.get('openingElement').get('name')
     const classDeclarationRawName = maybeMatchdNode.get('id').node.name
     const isMatched = sourceTagNamePath.isJSXIdentifier({ name: classDeclarationRawName })
@@ -35,7 +35,7 @@ const Check = {
   },
 
   // const B = Btn
-  VariableDeclarationFinder(maybeMatchdNode, sourceNode) {
+  VariableDeclaration(maybeMatchdNode, sourceNode) {
     const sourceTagNamePath = sourceNode.get('openingElement').get('name')
     const isMatched = (name) => sourceTagNamePath.isJSXIdentifier({ name })
     const declarations = maybeMatchdNode.get('declarations')

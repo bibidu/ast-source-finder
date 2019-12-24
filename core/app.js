@@ -50,7 +50,10 @@ const getMatchType = (startAst) => {
     case 'JSXElement':
       return ['ClassDeclaration']
     case 'Identifier':
-      return ['ClassDeclaration']
+      return [
+        'ClassDeclaration',
+        'VariableDeclaration'
+      ]
     default:
       return []
   }
