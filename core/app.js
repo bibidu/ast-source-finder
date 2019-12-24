@@ -8,16 +8,20 @@ function finder() {
   const _f = ({ startAst, matchTypes } = {}) => {
     let splitInputTypeNames = []
 
-    if (startAst.type === 'JSXElement') {
+    if (startAst.isJSXElement()) {
       const jsxTagName = startAst.get('openingElement').get('name').node.name
       const array = splitInputType(jsxTagName)
       splitInputTypeNames = array.map((item, index) => ({
         type: index === array.length - 1 ? 'JSXElement' : 'Identifier',
         value: item,
       }))
-    } else if (startAst.type === 'Identifier') {
+    } else if (startAst.isIdentifier()) {
       splitInputTypeNames = [{ type: 'Identifier', value: startAst.node.name }]
-    } else {
+    }
+    // else if (startAst.isArrowFunctionExpression()) {
+    //   splitInputTypeNames = 
+    // } 
+    else {
       const msg = `暂不支持${startAst.type}`
       throw Error(msg)
     }

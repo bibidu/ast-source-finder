@@ -3,10 +3,13 @@ const parser = require('@babel/parser')
 const traverse = require('@babel/traverse').default
 
 const code = `
-class Btn2 extends React.Component{
-  render() {
-    return <button>{this.props.btnText}</button>
-  }
+// class Btn2 extends React.Component{
+//   render() {
+//     return <button>{this.props.btnText}</button>
+//   }
+// }
+const Btn2 = () => {
+  return <button>{this.props.btnText}</button>
 }
 let Btn3
 Btn3 = Btn2

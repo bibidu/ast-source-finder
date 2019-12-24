@@ -50,7 +50,10 @@ const Check = {
 
     function getVariableDeclaratorValue(variableDeclaratorPath) {
       const initPath = variableDeclaratorPath.get('init')
-      if (initPath.isIdentifier()) {
+      if (
+        initPath.isIdentifier() ||
+        initPath.isArrowFunctionExpression()
+      ) {
         return initPath
       } else {
         const msg = `getVariableDeclaratorValue缺少${initPath.type}类型`
@@ -74,5 +77,5 @@ const Check = {
       isMatched: false,
       node: '',
     }
-  }
+  },
 }

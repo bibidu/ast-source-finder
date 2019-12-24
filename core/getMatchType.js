@@ -5,12 +5,14 @@ module.exports = function getMatchType(type) {
         'ClassDeclaration',
         'VariableDeclaration',
         'ExpressionStatement',
+        'ArrowFunctionExpression',
       ]
     case 'Identifier':
       return [
         'ClassDeclaration',
         'VariableDeclaration',
         'ExpressionStatement',
+        'ArrowFunctionExpression',
       ]
     default:
       return []
